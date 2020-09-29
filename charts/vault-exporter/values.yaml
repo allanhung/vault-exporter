@@ -4,7 +4,7 @@ image:
 
 vault:
   # vault server address
-  address: https://vault:8500
+  address: https://vault:8200
 
 securityContext:
   runAsUser: 1000
@@ -12,14 +12,14 @@ securityContext:
 
 serviceMonitor:
   # enabled should be set to true to enable prometheus-operator discovery of this service
-  enabled: true
+  enabled: false
   # interval is the interval at which metrics should be scraped
-  # interval: 30s
+  interval: 30s
   # scrapeTimeout is the timeout after which the scrape is ended
-  # scrapeTimeout: 10s
-  # additionalLabels is the set of additional labels to add to the ServiceMonitor
+  scrapeTimeout: 10s
+  # additionalLabels is the set of additional labels to add to the ServiceMonitor  
   additionalLabels: {}
-  jobLabel: "example"
+  jobLabel: ""
   targetLabels: []
   podTargetLabels: []
   metricRelabelings: []
@@ -27,32 +27,7 @@ serviceMonitor:
 ## Custom PrometheusRules to be defined
 ## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
 prometheusRule:
-  enabled: true
+  enabled: false
   additionalLabels: {}
   namespace: ""
-  rules: 
-    - alert: VaultLeadershipLoss
-      expr: sum(increase(vault_core_leadership_lost_count{job="example"}[1h])) > 5
-      for: 1m
-      labels:
-       severity: critical
-      annotations:
-       summary: High frequency of Vault leadership losses
-       description: There have been more than 5 Vault leadership losses in the past 1h
-    - alert: VaultLeadershipStepDowns
-      expr: sum(increase(vault_core_step_down_count{job="example"}[1h])) > 5
-      for: 1m
-      labels:
-       severity: critical
-      annotations:
-       summary: High frequency of Vault leadership step downs
-       description: There have been more than 5 Vault leadership step downs in the past 1h
-    - alert: VaultLeadershipSetupFailures
-      expr: sum(increase(vault_core_leadership_setup_failed{job="example"}[1h])) > 5
-      for: 1m
-      labels:
-       severity: critical
-      annotations:
-       summary: High frequency of Vault leadership setup failures
-       description: There have been more than 5 Vault leadership setup failures in the past 1h
-
+  rules: [] 
