@@ -1,5 +1,7 @@
 # Vault Exporter
 
+Version: v0.1.0
+
 Export [Hashicorp Vault](https://github.com/hashicorp/vault) health to [Prometheus](https://github.com/prometheus/prometheus).
 
 ## Exported Metrics
