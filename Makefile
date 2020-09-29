@@ -1,4 +1,4 @@
-DOCKER_IMAGE_NAME ?= grapeshot/vault_exporter
+DOCKER_IMAGE_NAME ?= allanhung/vault_exporter
 
 vault_exporter: main.go
 	go build -o $@ ./
