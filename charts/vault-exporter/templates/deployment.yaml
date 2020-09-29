@@ -30,9 +30,6 @@ spec:
               topologyKey: kubernetes.io/hostname
             weight: 100
       serviceAccountName: {{ include "resource.default.name" . }}
-      securityContext:
-        runAsUser: {{ .Values.securityContext.runAsUser }}
-        runAsGroup: {{ .Values.securityContext.runAsGroup }}
       containers:
       - name: {{ include "resource.default.name" . }}
         env:

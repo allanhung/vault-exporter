@@ -5,7 +5,3 @@ image:
 vault:
   # vault server address
   address: https://vault:8502
-
-securityContext:
-  runAsUser: 1000
-  runAsGroup: 1000
