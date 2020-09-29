@@ -3,6 +3,18 @@ entries:
   vault-exporter:
   - apiVersion: v1
     appVersion: 2.0.0
+    created: "2020-09-29T03:26:04.552395239Z"
+    description: Chart holding vault-exporter.
+    digest: 08951c1a3a624ae8462436f369816d3fa67b35d27c777a5fcc840c06ed9a38dd
+    home: https://github.com/allanhung/vault-exporter
+    maintainers:
+    - name: allanhung
+    name: vault-exporter
+    urls:
+    - https://github.com/allanhung/vault-exporter/releases/download/vault-exporter-0.1.1/vault-exporter-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v1
+    appVersion: 2.0.0
     created: "2020-09-29T02:20:24.86347962Z"
     description: Chart holding vault-exporter.
     digest: 94c8d2aa1101c211320d7f46ffe59a3e64f9f9b71aa193b04979b4115fafcf3a
