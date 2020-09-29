@@ -1,11 +1,6 @@
 name: Lint and Test Charts
 
 on:
-  push:
-    branches:
-      - 'test/**'
-    paths:
-      - 'charts/**'
   pull_request:
     paths:
       - 'charts/**'
@@ -39,8 +34,7 @@ jobs:
     strategy:
       matrix:
         k8s:
-          - v1.16.4
-          - v1.17.4
+          - v1.16.9
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -60,7 +54,6 @@ jobs:
       matrix:
         k8s:
           - v1.16.9
-          - v1.17.5
     steps:
       - name: Checkout
         uses: actions/checkout@v1

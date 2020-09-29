@@ -1,0 +1,23 @@
+{{ template "chart.header" . }}
+{{ template "chart.description" . }}
+
+{{ template "chart.versionLine" . }}
+
+{{ template "chart.homepageLine" . }}
+
+## Installation
+
+## Install vault-exporter
+
+```shell
+helm repo add allanhung https://allanhung.github.io/vault-exporter
+helm upgrade vault-exporter allanhung/vault-exporter --install --create-namespace \
+    --namespace vault-exporter \
+    -f values.yaml
+```
+
+## Configuration
+
+The following table lists the configurable parameters of the chart and the default values.
+
+{{ template "chart.valuesSection" . }}

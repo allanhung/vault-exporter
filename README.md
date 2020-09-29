@@ -25,6 +25,11 @@ are designed to be combined with the [prometheus-ksonnet](https://github.com/kau
 To install this mixin, use [ksonnet](https://ksonnet.io/):
 
 ```sh
+$ helm repo add allanhung https://allanhung.github.io/vault-exporter
+$ helm upgrade vault-exporter allanhung/vault-exporter --install --create-namespace \
+    --namespace vault-exporter \
+    -f values.yaml
+
 $ ks registry add vault_exporter https://github.com/grapeshot/vault_exporter
 $ ks pkg install vault_exporter/vault-mixin
 ```

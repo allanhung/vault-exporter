@@ -1,6 +1,8 @@
 apiVersion: "v1"
 appVersion: "2.0.0"
+maintainers:
+  - name: allanhung
 description: "Chart holding vault-exporter."
 home: "https://github.com/allanhung/vault-exporter"
 name: "vault-exporter"
-version: "0.1.0"
+version: "0.1.1"
