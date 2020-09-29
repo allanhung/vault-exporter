@@ -17,7 +17,7 @@ serviceMonitor:
   interval: 30s
   # scrapeTimeout is the timeout after which the scrape is ended
   scrapeTimeout: 10s
-  # additionalLabels is the set of additional labels to add to the ServiceMonitor  
+  # additionalLabels is the set of additional labels to add to the ServiceMonitor 
   additionalLabels: {}
   jobLabel: ""
   targetLabels: []
@@ -30,4 +30,4 @@ prometheusRule:
   enabled: false
   additionalLabels: {}
   namespace: ""
-  rules: [] 
+  rules: []
