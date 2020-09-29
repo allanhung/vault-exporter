@@ -26,7 +26,7 @@ To install this mixin, use [ksonnet](https://ksonnet.io/):
 
 ```sh
 $ helm repo add allanhung https://allanhung.github.io/vault-exporter
-helm upgrade vault-exporter allanhung/vault-exporter --install --create-namespace \
+$ helm upgrade vault-exporter allanhung/vault-exporter --install --create-namespace \
     --namespace vault-exporter \
     -f values.yaml
 
