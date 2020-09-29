@@ -4,8 +4,30 @@ image:
 
 vault:
   # vault server address
-  address: https://vault:8500
+  address: https://vault:8200
 
 securityContext:
   runAsUser: 1000
   runAsGroup: 1000
+
+serviceMonitor:
+  # enabled should be set to true to enable prometheus-operator discovery of this service
+  enabled: false
+  # interval is the interval at which metrics should be scraped
+  interval: 30s
+  # scrapeTimeout is the timeout after which the scrape is ended
+  scrapeTimeout: 10s
+  # additionalLabels is the set of additional labels to add to the ServiceMonitor
+  additionalLabels: {}
+  jobLabel: ""
+  targetLabels: []
+  podTargetLabels: []
+  metricRelabelings: []
+
+## Custom PrometheusRules to be defined
+## ref: https://github.com/coreos/prometheus-operator#customresourcedefinitions
+prometheusRule:
+  enabled: false
+  additionalLabels: {}
+  namespace: ""
+  rules: []
