@@ -56,6 +56,26 @@ var (
 		"Is this Vault node in standby.",
 		nil, nil,
 	)
+	replicationDrPrimary = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "", "replication_dr_primary"),
+		"Is this Vault node a primary disaster recovery replica.",
+		nil, nil,
+	)
+	replicationDrSecondary = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "", "replication_dr_secondary"),
+		"Is this Vault node a secondary disaster recovery replica.",
+		nil, nil,
+	)
+	replicationPerformancePrimary = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "", "replication_performance_primary"),
+		"Is this Vault node a primary performance replica.",
+		nil, nil,
+	)
+	replicationPerformanceSecondary = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "", "replication_performance_secondary"),
+		"Is this Vault node a secondary performance replica.",
+		nil, nil,
+	)
 	info = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "info"),
 		"Version of this Vault node.",
@@ -114,6 +134,10 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 	ch <- initialized
 	ch <- sealed
 	ch <- standby
+	ch <- replicationDrPrimary
+	ch <- replicationDrSecondary
+	ch <- replicationPerformancePrimary
+	ch <- replicationPerformanceSecondary
 	ch <- info
 }
 
@@ -148,6 +172,51 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 	ch <- prometheus.MustNewConstMetric(
 		standby, prometheus.GaugeValue, bool2float(health.Standby),
 	)
+	if health.ReplicationDRMode == "disabled" {
+		ch <- prometheus.MustNewConstMetric(
+			replicationDrPrimary, prometheus.GaugeValue, 0,
+		)
+		ch <- prometheus.MustNewConstMetric(
+			replicationDrSecondary, prometheus.GaugeValue, 0,
+		)
+	} else if health.ReplicationDRMode == "primary" {
+		ch <- prometheus.MustNewConstMetric(
+			replicationDrPrimary, prometheus.GaugeValue, 1,
+		)
+		ch <- prometheus.MustNewConstMetric(
+			replicationDrSecondary, prometheus.GaugeValue, 0,
+		)
+	} else if health.ReplicationDRMode == "secondary" {
+		ch <- prometheus.MustNewConstMetric(
+			replicationDrPrimary, prometheus.GaugeValue, 0,
+		)
+		ch <- prometheus.MustNewConstMetric(
+			replicationDrSecondary, prometheus.GaugeValue, 1,
+		)
+	}
+
+	if health.ReplicationPerformanceMode == "disabled" {
+		ch <- prometheus.MustNewConstMetric(
+			replicationPerformancePrimary, prometheus.GaugeValue, 0,
+		)
+		ch <- prometheus.MustNewConstMetric(
+			replicationPerformanceSecondary, prometheus.GaugeValue, 0,
+		)
+	} else if health.ReplicationPerformanceMode == "primary" {
+		ch <- prometheus.MustNewConstMetric(
+			replicationPerformancePrimary, prometheus.GaugeValue, 1,
+		)
+		ch <- prometheus.MustNewConstMetric(
+			replicationPerformanceSecondary, prometheus.GaugeValue, 0,
+		)
+	} else if health.ReplicationPerformanceMode == "secondary" {
+		ch <- prometheus.MustNewConstMetric(
+			replicationPerformancePrimary, prometheus.GaugeValue, 0,
+		)
+		ch <- prometheus.MustNewConstMetric(
+			replicationPerformanceSecondary, prometheus.GaugeValue, 1,
+		)
+	}
 	ch <- prometheus.MustNewConstMetric(
 		info, prometheus.GaugeValue, 1, health.Version, health.ClusterName, health.ClusterID,
 	)

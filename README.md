@@ -12,6 +12,10 @@ Export [Hashicorp Vault](https://github.com/hashicorp/vault) health to [Promethe
 | vault_initialized | Is the Vault initialised (according to this node). | |
 | vault_sealed | Is the Vault node sealed. | |
 | vault_standby | Is this Vault node in standby. | |
+| vault_replication_dr_primary | Is this Vault node a primary disaster recovery replica. | |
+| vault_replication_dr_secondary | Is this Vault node a secondary disaster recovery replica. | |
+| vault_replication_performance_primary | Is this Vault node a primary performance replica. | |
+| vault_replication_performance_secondary | Is this Vault node a secondary performance replica. | |
 | vault_info | Various info about the Vault node. | version, cluster_name, cluster_id |
 
 ## Dashboards and alerts
